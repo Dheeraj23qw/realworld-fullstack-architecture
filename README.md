@@ -1,15 +1,19 @@
 
 ---
 
-# From Tutorial Code to Production Architecture
+<h1 align="center">From Tutorial Code to Production Architecture</h1>
 
-### How I Realized Folder Structure Matters More Than I Thought
+<h3 align="center">How I Realized Folder Structure Matters More Than I Thought</h3>
+
+---
+
+## The Beginning
 
 When I started building full-stack applications, I believed something simple:
 
-If the app works, the structure must be fine.
+> If the app works, the structure must be fine.
 
-And honestly, in the beginning, it *was* fine.
+And honestly, in the beginning, it <b>was</b> fine.
 
 My projects looked clean. Everything was organized. Nothing felt wrong.
 
@@ -21,7 +25,7 @@ Until they started growing.
 
 Like most developers learning from tutorials, my project looked something like this:
 
-```
+```bash
 src/
   components/
   pages/
@@ -32,7 +36,7 @@ src/
 
 On the backend:
 
-```
+```bash
 controllers/
 routes/
 models/
@@ -53,21 +57,25 @@ The issue didn’t appear in small projects.
 
 It appeared when I tried to:
 
-* Add new features
-* Refactor authentication
-* Fix bugs across modules
-* Scale the application
+<ul>
+  <li>Add new features</li>
+  <li>Refactor authentication</li>
+  <li>Fix bugs across modules</li>
+  <li>Scale the application</li>
+</ul>
 
 For example:
 
 If I wanted to understand how authentication worked, I had to check:
 
-* `controllers/authController.ts`
-* `services/authService.ts`
-* `routes/authRoutes.ts`
-* `redux/authSlice.ts`
-* `components/LoginForm.tsx`
-* `utils/tokenHelpers.ts`
+```bash
+controllers/authController.ts
+services/authService.ts
+routes/authRoutes.ts
+redux/authSlice.ts
+components/LoginForm.tsx
+utils/tokenHelpers.ts
+```
 
 Auth logic was scattered everywhere.
 
@@ -88,15 +96,17 @@ Folder structure is not about neatness.
 
 It’s about:
 
-* Ownership
-* Scalability
-* Maintainability
-* Mental clarity
+<ul>
+  <li>Ownership</li>
+  <li>Scalability</li>
+  <li>Maintainability</li>
+  <li>Mental clarity</li>
+</ul>
 
-Professionals don’t group files by *what they are*.
-They group them by *what they belong to*.
+Professionals don’t group files by <i>what they are</i>.
+They group them by <i>what they belong to</i>.
 
-That’s when I learned the concept of **feature-based architecture**.
+That’s when I learned the concept of <b>feature-based architecture</b>.
 
 ---
 
@@ -104,7 +114,7 @@ That’s when I learned the concept of **feature-based architecture**.
 
 Instead of this:
 
-```
+```bash
 controllers/
 services/
 routes/
@@ -112,7 +122,7 @@ routes/
 
 I moved to this:
 
-```
+```bash
 modules/
   auth/
   user/
@@ -121,7 +131,7 @@ modules/
 
 Instead of this on the frontend:
 
-```
+```bash
 components/
 pages/
 services/
@@ -129,7 +139,7 @@ services/
 
 I moved to:
 
-```
+```bash
 features/
   auth/
   users/
@@ -140,13 +150,13 @@ Suddenly, everything changed.
 
 If I wanted to work on authentication, I went to:
 
-```
+```bash
 features/auth/
 ```
 
 Or on backend:
 
-```
+```bash
 modules/auth/
 ```
 
@@ -164,10 +174,12 @@ Early-stage startups don’t overcomplicate architecture.
 
 They use:
 
-* Separate frontend and backend
-* Feature-based frontend structure
-* Module-based backend structure
-* Clear separation between controller and business logic
+<ul>
+  <li>Separate frontend and backend</li>
+  <li>Feature-based frontend structure</li>
+  <li>Module-based backend structure</li>
+  <li>Clear separation between controller and business logic</li>
+</ul>
 
 Not because it looks impressive.
 
@@ -177,7 +189,7 @@ When teams grow, feature ownership becomes critical.
 
 If a developer is assigned “Posts”, they should only need to work inside:
 
-```
+```bash
 modules/post/
 ```
 
@@ -189,104 +201,9 @@ That’s clean architecture.
 
 Here is what I now use and recommend for beginners.
 
-### Project Root
-
-```
-my-fullstack-app/
-  client/
-  server/
-  README.md
-```
-
 ---
 
-### Frontend (Feature-Based)
-
-```
-client/
-  src/
-    app/
-
-    features/
-      auth/
-        components/
-        pages/
-        api.ts
-        authSlice.ts
-        types.ts
-
-      users/
-      posts/
-
-    shared/
-      components/
-      hooks/
-      utils/
-      constants/
-
-    store/
-```
-
----
-
-### Backend (Module-Based)
-
-```
-server/
-  src/
-    server.ts
-    app.ts
-
-    modules/
-      auth/
-        auth.routes.ts
-        auth.controller.ts
-        auth.service.ts
-        auth.types.ts
-
-      user/
-      post/
-
-    middleware/
-    config/
-    database/
-```
-
-And inside each backend module:
-
-Controller → Service → Database
-
-Controller handles request/response.
-Service handles business logic.
-Database layer handles persistence.
-
-Clear boundaries.
-
----
-
-## The Biggest Lesson I Learned
-
-If deleting a feature breaks the entire project, your architecture is wrong.
-
-A well-structured project allows you to remove:
-
-```
-features/auth/
-```
-
-or
-
-```
-modules/auth/
-```
-
-without touching unrelated areas.
-
-That is modular thinking.
-
----
-
-## 1. Project Root
+### 1. Project Root
 
 ```text
 /my-startup-app
@@ -295,13 +212,11 @@ That is modular thinking.
 ├── shared-types/    # (Optional) Shared TypeScript interfaces
 ├── .env             # Global secrets
 └── docker-compose.yml
-
 ```
 
 ---
 
-## 2. Frontend
-
+### 2. Frontend
 
 ```text
 client/src/
@@ -318,14 +233,11 @@ client/src/
 ├── services/          # API definitions (if not inside features)
 ├── store/             # Global state (Redux/Zustand)
 └── utils/             # Formatters, Validations (dateFormatter.ts)
-
 ```
-
 
 ---
 
-## 3. Backend
-
+### 3. Backend
 
 ```text
 server/src/
@@ -342,7 +254,7 @@ server/src/
 ├── utils/             # Helpers (logger.ts, sendEmail.ts)
 ├── app.ts             # Express app setup
 └── server.ts          # Entry point (Listen to port)
-
 ```
 
+---
 
